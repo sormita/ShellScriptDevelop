@@ -14,8 +14,9 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    - task: Bash@3
-      inputs:
-        filePath: '/FolderPermissions.sh'
-        workingDirectory: '.'
+    - task: CmdLine@2
+            inputs:
+              script: |
+                IP=($(curl -s http://ipinfo.io/json | jq -r '.ip'))
+                echo "##vso[task.setvariable variable=IP]$IP"
 
